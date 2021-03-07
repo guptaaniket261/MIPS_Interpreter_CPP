@@ -3,7 +3,6 @@
 #include <sstream>
 #include<vector>
 #include<map>
-#include<regex>
 using namespace std;
 
 struct Instruction
@@ -21,7 +20,6 @@ vector<Instruction>instructs;   //stores instructions as structs
 int memory[(1<<20)]={0}; //memory used to store the data
 int PC=0;               // PC pointer, points to the next instruction
 map<string,int> operation;
-
 
 void map_operations(){
     operation["add"]=1;
@@ -189,168 +187,175 @@ void initialise_Registers(){
 bool valid_register(string R){
     return register_values.find(R)!=register_values.end();
 }
-
-
-
-//handle the case when integer is beyond instruction memory at execution time
-
-void Create_structs(vector<string>words){
-    int i=0;
-    while(i<words.size()){
-        
-        if(words[i] == "add" || words[i] == "sub" || words[i] == "mul" || words[i] == "slt"){
-            //now, there must be three registers ahead
-            if(i+3>=words.size()){
-                validFile=false;
-                return;
-            }
-            else{
-                string R1=words[i+1];
-                string R2=words[i+2];
-                string R3=words[i+3];
-                if(valid_register(R1) && valid_register(R2) && valid_register(R3)){
-                    //these are valid register names
-                    struct Instruction new_instr;
-                    new_instr.name=words[i];
-                    
-                    new_instr.field_1 = R1;
-                    new_instr.field_2 = R2;
-                    new_instr.field_3 = R3;
-
-                    i=i+4;
-                    
-                }
-                else{
-                    validFile = false;
-                    return;
-                }
-                
-            }
-        }
-        else if (words[i]=="beq" || words[i]=="bne" || words[i]=="addi"){
-            if(i+3>=words.size()){
-                validFile=false;
-                return;
-            }
-            else{
-                string R1=words[i+1];
-                string R2=words[i+2];
-                string R3=words[i+3];
-                if(valid_register(R1) && valid_register(R2) && is_integer(R3)){
-                    //these are valid register names
-                    struct Instruction new_instr;
-                    new_instr.name=words[i];
-                    new_instr.field_1 = R1;
-                    new_instr.field_2 = R2;
-                    new_instr.field_3 = R3;
-
-                    i=i+4;
-                }
-                else{
-                    validFile = false;
-                    return;
-                }
-                         
-            }
-        }
-        else if (words[i]=="j"){
-            if(i+1>=words.size()){
-                validFile=false;
-                return;
-            }
-            else{
-                string R1=words[i+1];
-                if(is_integer(R1)){
-                    struct Instruction new_instr;
-                    new_instr.name=words[i];
-                    new_instr.field_1 = R1;
-                    new_instr.field_2 = "";
-                    new_instr.field_3 = "";
-                    i = i+2;
-                }
-                else{
-                    validFile = false;
-                    return;
-                }
-            }
-        }
-        else if (words[i] == "lw" || words[i] == "sw"){
-            //this has the format lw $t0, offset($register_name)
-            if(i+2>=words.size()){
-                validFile=false;
-                return;
-            }
-            else{
-                string R1 = words[i+1];
-                string R2 = words[i+2];
-                if(valid_register(R1)){
-                    string offset="";
-                    for(int i=0;i<R2.length();i++){
-                        if(R2[i]!='('){
-                            offset += R2[i];
-                        }
-                        else{
-                            break;
-                        }
-                    }
-                    if(offset.size()+5!=R2.size()){  //size required for ($reg_name)
-                        validFile=false;
-                        return;
-                    }
-                    else{
-                        if(R2[offset.size()]=='(' && R2[R2.size()-1] == ')'){
-                            //now, the string inside must be a register name
-                            string inside = R2.substr(offset.size()+1,R2.size()-offset.size()-2);
-                            if(valid_register(inside) && is_integer(offset)){
-                                // check if offset divides 4 during execution
-                                struct Instruction new_instr;
-                                new_instr.name=words[i];
-                                new_instr.field_1 = R1;
-                                new_instr.field_2 = offset;
-                                new_instr.field_3 = inside;
-
-                                i = i + 3;
-                            }
-                            else{
-                                validFile=false;
-                                return;
-                            }
-                        }
-                        else{
-                            validFile=false;
-                            return;
-                        }
-                    }
-                }
-                else{
-                    validFile = false;
-                    return;
-                }
-            }
+int SearchForRegister (int starting_index, int ending_index, string file_string){
+    //this is a helper function which searches for a register from starting index and returns the starting point of it
+    int start = -1;
+    for (int j= starting_index; j<=ending_index; j++){
+        if(file_string[j]==' ' || file_string[j] == '\t'){continue;}
+        else{start =j;break;}
+    }
+    if(start == -1 || start + 2 > ending_index){return -1;}
+    if (!valid_register(file_string.substr(start,3))){return -1;}
+    return start;  //else found a valid register
+}
+int SearchForCharacter (int starting_index, int ending_index, string file_string ,char Matching){
+    //returns the position of Matching if it is the first non-whitespace character to be found, -1 otherwise
+    int start = -1;
+    for (int j= starting_index; j<=ending_index; j++){
+        if(file_string[j]==' ' || file_string[j] == '\t'){continue;}
+        else if (file_string[j]==Matching){return j;}
+        else{return -1;}
+    }
+    return -1; //if no character found except whitespace
+}
+pair<int,int> SearchForInteger (int starting_index, int ending_index, string file_string){
+    //returns the starting and ending index of integer if found
+    int start=-1;int end=-1;
+    for (int j= starting_index; j<=ending_index; j++){
+        if((file_string[j] == ' ' || file_string[j] == '\t') && start ==-1){continue;} //removing the starting spaces and tabs}
+        if (isdigit(file_string[j])){
+            if(start==-1){start=j;end=j;}
+            else{end=j;}
         }
         else{
-            validFile=false;
+            return {start,end};
+        }
+    }
+    return {start,end};
+}
+string Match_Instruction(int start, int end, string file_string){
+    //returns the matched instruction
+    if(start + 2 <=end){
+        string ins = file_string.substr(start,3);
+        if (ins == "add" || ins == "sub" || ins == "mul" || ins == "slt" ||ins =="beq" || ins =="bne"){return ins;}
+    }
+    if (start +1 <=end){
+        string ins =file_string.substr(start,2);
+        if (ins =="lw" || ins == "sw"){return ins;}
+    }
+    if (start +3 <=end){
+        string ins =file_string.substr(start,4);
+        if (ins =="addi"){return ins;}
+    }
+    if (start<=end){
+        string ins= file_string.substr(start,1);
+        if (ins== "j"){return ins;}
+    }
+    return ""; //when no valid instruction found
+}
+
+//handle the case when integer is beyond instruction memory at execution time
+void Create_structs(string file_string){
+    int i=0;
+    bool instruction_found = false;
+    // each line can contain atmost one instruction
+    while(i<file_string.size()){
+        if(file_string[i]==' ' || file_string[i] == '\t'){i++;continue;}
+        else{
+            if(instruction_found){validFile=false;return;}   //if we have already found an instruction and a character appears, file is invalid
+        string ins = Match_Instruction(i, file_string.size()-1, file_string);
+        if (ins ==""){  //invalid matching
+            validFile = false;
             return;
         }
+        if(ins == "add" || ins == "sub" || ins == "mul" || ins == "slt" || ins == "beq" || ins == "bne" || ins == "addi"){
+            //now, there must be three registers ahead, delimited by comma
+            int reg1_start=SearchForRegister(i+3, file_string.size()-1, file_string);
+            if(reg1_start==-1){validFile=false;return;}
+            string R1=file_string.substr(reg1_start,3);
+            //now first register has been found, it must be followed by a comma and there can be 0 or more whitespaces in between
+            int comma1Pos=SearchForCharacter(reg1_start+3,file_string.size()-1, file_string, ',');
+            if (comma1Pos==-1){validFile=false;return;}
+            int reg2_start=SearchForRegister(comma1Pos+1, file_string.size()-1, file_string);
+            if(reg2_start==-1){validFile=false;return;}
+            string R2=file_string.substr(reg2_start,3);
+            int comma2Pos= SearchForCharacter(reg2_start+3, file_string.size()-1, file_string, ',');
+            if (comma2Pos==-1){validFile=false;return;}
+            int reg3_start= SearchForRegister(comma2Pos+1, file_string.size()-1, file_string);
+            //instead of third register, we can also have an integer value
+            pair<int,int> integer_indices = SearchForInteger(comma2Pos+1,file_string.size()-1, file_string);
+            int index_looped;
+            if(reg3_start==-1 && integer_indices.first==-1){validFile=false;return;} //neither an integer nor a string
+            string R3;
+            if (reg3_start!=-1){
+                if(ins!="beq" && ins!="bne" && ins!="addi"){       //is a register and instruction is not bne,beq or addi
+                    R3=file_string.substr(reg3_start,3);
+                    index_looped = reg3_start +3;
+                }
+                else{       //beq,bne and addi must have the third argument as an integer
+                    validFile=false;
+                    return;
+                }
+            }
+            else{R3= file_string.substr(integer_indices.first, integer_indices.second- integer_indices.first+1);
+                index_looped = integer_indices.second+1;
+            }
+            struct Instruction new_instr;
+            new_instr.name=ins;
+            new_instr.field_1 = R1;
+            new_instr.field_2 = R2;
+            new_instr.field_3 = R3;
+            i = index_looped; //increment i
+            instruction_found=true;
+            continue;
+        }
+        else if (ins == "j"){
+            pair<int,int> integer_indices = SearchForInteger(i+1 ,file_string.size()-1, file_string);
+            if (integer_indices.first == -1){validFile=false; return;}
+                    struct Instruction new_instr;
+                    new_instr.name=ins;
+                    new_instr.field_1 = file_string.substr(integer_indices.first, integer_indices.second- integer_indices.first+1);
+                    new_instr.field_2 = "";
+                    new_instr.field_3 = "";
+                    int index_looped = integer_indices.second +1;
+                    i = index_looped;
+                    instruction_found =true;
+        }
+        else if (ins == "lw" || ins == "sw"){
+            //this has the format lw $t0, offset($register_name)
+            // first of all search for the first register
+            int reg1_start=SearchForRegister(i+2, file_string.size()-1, file_string);
+            if(reg1_start==-1){validFile=false;return;}
+            string R1=file_string.substr(reg1_start,3);
+            //now we will search for a comma and match it
+            int commaPos=SearchForCharacter(reg1_start+3,file_string.size()-1, file_string, ',');
+            if (commaPos==-1){validFile=false;return;}
+            // now we will search for an integer offset and match it
+            pair<int,int> integer_indices = SearchForInteger(commaPos+1,file_string.size()-1, file_string);
+            if(integer_indices.first==-1){validFile=false;return;}
+            string offset = file_string.substr(integer_indices.first, integer_indices.second - integer_indices.first+1);
+            // now we will match Left parenthesis
+            int lparenPos=SearchForCharacter(integer_indices.second+1 ,file_string.size()-1, file_string, '(');
+            if (lparenPos==-1){validFile=false;return;}
+            //now we will match a register
+            int reg2_start=SearchForRegister(lparenPos+1, file_string.size()-1, file_string);
+            if(reg2_start==-1){validFile=false;return;}
+            string R2=file_string.substr(reg2_start,3);
+            // now we will match the right parenthesis
+            int rparenPos = SearchForCharacter(reg2_start+3, file_string.size()-1, file_string, ')');
+            if (rparenPos ==-1){validFile = false;return;}
+            struct Instruction new_instr;
+            new_instr.name=ins;
+            new_instr.field_1 = R1;
+            new_instr.field_2 = offset;
+            new_instr.field_3 = R2;
+            i= rparenPos+1;
+            instruction_found=true;
     }
 }
-int main(){
-    ifstream file("mips_program.txt");
-    string current_line;
-    map_register_numbers();
-    initialise_Registers();
-    while(file){
-        getline(file,current_line);
-        regex allowed("[^\\s,]+"); //to split the string on whitespace and comma
-        auto start = sregex_iterator(current_line.begin(), current_line.end(),allowed);
-        auto end = sregex_iterator();
-        for (sregex_iterator i = start; i != end; ++i){
-            words.push_back((*i).str());
-        }
     }
+}
 
-    Create_structs(words); //creates structs of instructions from words
-
+int main(){
+    
+     ifstream file("mips_program.txt");
+      string current_line;
+      map_register_numbers();
+      initialise_Registers();
+      while(file){
+          getline(file,current_line);
+          Create_structs(current_line);
+      }
     map_operations();
     perform_operations();
     
