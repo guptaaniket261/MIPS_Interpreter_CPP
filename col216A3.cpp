@@ -5,6 +5,7 @@
 #include<map>
 #include<regex>
 using namespace std;
+
 struct Instruction
 {
     string name;
@@ -19,6 +20,138 @@ bool validFile = true;          //will be false if file is invalid at any point
 vector<Instruction>instructs;   //stores instructions as structs
 int memory[(1<<20)]={0}; //memory used to store the data
 int PC=0;               // PC pointer, points to the next instruction
+map<string,int> operation;
+
+
+void map_operations(){
+    operation["add"]=1;
+    operation["sub"]=2;
+    operation["mul"]=3;
+    operation["beq"]=4;
+    operation["bne"]=5;
+    operation["slt"]=6;
+    operation["j"]=7;
+    operation["lw"]=8;
+    operation["sw"]=9;
+    operation["addi"]=10;
+
+}
+
+void perform_operations(){
+    while(PC<instructs.size()){
+        struct Instruction current = instructs[PC];
+        int action= operation[current.name];
+        switch(action){
+            case 1: add();break;
+            case 2: sub();break;
+            case 3: mul();break;
+            case 4: beq();break;
+            case 5: bne();break;
+            case 6: slt();break;
+            case 7: j();break;
+            case 8: lw();break;
+            case 9: sw();break;
+            case 10:addi();break;
+
+        }
+    }
+}
+
+
+bool is_integer(string s){
+    for(int j=0;j<s.length();j++){
+        if(isdigit(s[j]) == false){
+            return false;
+        }
+    }
+    return true;
+}
+
+
+void add(){
+    struct Instruction current = instructs[PC];
+    if(is_integer(current.field_3)){
+        register_values[current.field_1]=register_values[current.field_2]+stoi(current.field_3);
+    }
+    else{
+        register_values[current.field_1]=register_values[current.field_2]+register_values[current.field_3];
+    }
+    PC++;
+}
+
+void sub(){
+    struct Instruction current = instructs[PC];
+    if(is_integer(current.field_3)){
+        register_values[current.field_1]=register_values[current.field_2]-stoi(current.field_3);
+    }
+    else{
+        register_values[current.field_1]=register_values[current.field_2]-register_values[current.field_3];
+    }
+    PC++;
+}
+
+
+void mul(){
+    struct Instruction current = instructs[PC];
+    if(is_integer(current.field_3)){
+        register_values[current.field_1]=register_values[current.field_2]*stoi(current.field_3);
+    }
+    else{
+        register_values[current.field_1]=register_values[current.field_2]*register_values[current.field_3];
+    }
+    PC++;
+}
+
+
+void beq(){
+    struct Instruction current = instructs[PC];
+    if(register_values[current.field_1]==register_values[current.field_2]){
+        PC=current.field_3-1;
+    }
+    else PC++;
+}
+
+
+void bne(){
+    struct Instruction current = instructs[PC];
+    if(register_values[current.field_1]!=register_values[current.field_2]){
+        PC=current.field_3-1;
+    }
+    else PC++;
+}
+
+
+void slt(){
+    struct Instruction current = instructs[PC];
+    if(register_values[current.field_3]==register_values[current.field_2])register_values[current.field_1]=1;
+    else register_values[current.field_1]=0;
+    PC++;
+}
+
+
+void j(){
+    struct Instruction current = instructs[PC];
+    PC=current.field_1-1;
+}
+
+
+// void lw(){
+//     struct Instruction current = instructs[PC];
+//     register_values[current.field_1]=
+// }
+
+
+// void sw(){
+    
+// }
+
+
+void addi(){
+    struct Instruction current = instructs[PC];
+    register_values[current.field_1]=register_values[current.field_2]+stoi(current.field_2);
+    PC++;
+}
+
 
 void map_register_numbers(){
     //maps each register to a unique number between 0-31 inclusive
@@ -57,14 +190,7 @@ bool valid_register(string R){
     return register_values.find(R)!=register_values.end();
 }
 
-bool is_integer(string s){
-    for(int j=0;j<s.length();j++){
-        if(isdigit(s[j]) == false){
-            return false;
-        }
-    }
-    return true;
-}
+
 
 //handle the case when integer is beyond instruction memory at execution time
 
@@ -224,6 +350,9 @@ int main(){
     }
 
     Create_structs(words); //creates structs of instructions from words
+
+    map_operations();
+    perform_operations();
     
     if(!validFile){
         cout<<"Invalid MIPS program"<<endl;
