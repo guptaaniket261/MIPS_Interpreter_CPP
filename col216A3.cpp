@@ -3,6 +3,7 @@
 #include <sstream>
 #include<vector>
 #include<map>
+#include<regex>
 using namespace std;
 struct Instruction
 {
@@ -68,8 +69,8 @@ bool is_integer(string s){
 //handle the case when integer is beyond instruction memory at execution time
 
 void Create_structs(vector<string>words){
-    
-    for(int i=0;i<words.size();i++){
+    int i=0;
+    while(i<words.size()){
         
         if(words[i] == "add" || words[i] == "sub" || words[i] == "mul" || words[i] == "slt"){
             //now, there must be three registers ahead
@@ -89,6 +90,8 @@ void Create_structs(vector<string>words){
                     new_instr.field_1 = R1;
                     new_instr.field_2 = R2;
                     new_instr.field_3 = R3;
+
+                    i=i+4;
                     
                 }
                 else{
@@ -114,6 +117,8 @@ void Create_structs(vector<string>words){
                     new_instr.field_1 = R1;
                     new_instr.field_2 = R2;
                     new_instr.field_3 = R3;
+
+                    i=i+4;
                 }
                 else{
                     validFile = false;
@@ -135,6 +140,11 @@ void Create_structs(vector<string>words){
                     new_instr.field_1 = R1;
                     new_instr.field_2 = "";
                     new_instr.field_3 = "";
+                    i = i+2;
+                }
+                else{
+                    validFile = false;
+                    return;
                 }
             }
         }
@@ -172,6 +182,8 @@ void Create_structs(vector<string>words){
                                 new_instr.field_1 = R1;
                                 new_instr.field_2 = offset;
                                 new_instr.field_3 = inside;
+
+                                i = i + 3;
                             }
                             else{
                                 validFile=false;
@@ -203,12 +215,14 @@ int main(){
     initialise_Registers();
     while(file){
         getline(file,current_line);
-        istringstream ss(current_line);
-        string word;
-        while(ss >> word){
-           words.push_back(word);  //storing all the words in the word vector
+        regex allowed("[^\\s,]+"); //to split the string on whitespace and comma
+        auto start = sregex_iterator(current_line.begin(), current_line.end(),allowed);
+        auto end = sregex_iterator();
+        for (sregex_iterator i = start; i != end; ++i){
+            words.push_back((*i).str());
         }
     }
+
     Create_structs(words); //creates structs of instructions from words
     
     if(!validFile){
@@ -222,4 +236,5 @@ int main(){
     
     return 0;
 }
+
 
