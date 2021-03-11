@@ -132,15 +132,18 @@ void j(){
 }
 
 
-// void lw(){
-//     struct Instruction current = instructs[PC];
-//     register_values[current.field_1]=
-// }
+void lw(){
+    struct Instruction current = instructs[PC];
+    register_values[current.field_1]= memory[register_values[current.field_3]+stoi(current.field_2)];
+    PC++;
+}
 
 
-// void sw(){
-    
-// }
+void sw(){
+    struct Instruction current = instructs[PC];
+    memory[register_values[current.field_3]+stoi(current.field_2)] = register_values[current.field_1];
+    PC++;
+}
 
 
 void addi(){
@@ -356,8 +359,8 @@ void perform_operations(){
             case 5: bne();break;
             case 6: slt();break;
             case 7: j();break;
-            //case 8: lw();break;
-            //case 9: sw();break;
+            case 8: lw();break;
+            case 9: sw();break;
             case 8:addi();break;
 
         }
