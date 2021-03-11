@@ -4,6 +4,24 @@
 #include<vector>
 #include<map>
 using namespace std;
+// function to convert a decimal number to a hexadecimal number
+string HexaNumber(int n)
+{
+    string ans = "";
+    int rem;
+    while (n != 0) {
+        rem = n % 16;
+        // check if rem < 10
+        if (rem < 10) {
+            ans+=char(rem+48);
+        }
+        else {
+            ans+=char(rem+55);
+        }
+        n/=16;
+    }
+    return ans;
+}
 
 struct Instruction
 {
