@@ -35,25 +35,6 @@ void map_operations(){
 
 }
 
-void perform_operations(){
-    while(PC<instructs.size()){
-        struct Instruction current = instructs[PC];
-        int action= operation[current.name];
-        switch(action){
-            case 1: add();break;
-            case 2: sub();break;
-            case 3: mul();break;
-            case 4: beq();break;
-            case 5: bne();break;
-            case 6: slt();break;
-            case 7: j();break;
-            case 8: lw();break;
-            case 9: sw();break;
-            case 10:addi();break;
-
-        }
-    }
-}
 
 
 bool is_integer(string s){
@@ -104,7 +85,7 @@ void mul(){
 void beq(){
     struct Instruction current = instructs[PC];
     if(register_values[current.field_1]==register_values[current.field_2]){
-        PC=current.field_3-1;
+        PC=stoi(current.field_3)-1;
     }
     else PC++;
 }
@@ -113,7 +94,7 @@ void beq(){
 void bne(){
     struct Instruction current = instructs[PC];
     if(register_values[current.field_1]!=register_values[current.field_2]){
-        PC=current.field_3-1;
+        PC=stoi(current.field_3)-1;
     }
     else PC++;
 }
@@ -129,7 +110,7 @@ void slt(){
 
 void j(){
     struct Instruction current = instructs[PC];
-    PC=current.field_1-1;
+    PC=stoi(current.field_1)-1;
 }
 
 
@@ -343,6 +324,25 @@ void Create_structs(string file_string){
             instruction_found=true;
     }
 }
+    }
+}
+void perform_operations(){
+    while(PC<instructs.size()){
+        struct Instruction current = instructs[PC];
+        int action= operation[current.name];
+        switch(action){
+            case 1: add();break;
+            case 2: sub();break;
+            case 3: mul();break;
+            case 4: beq();break;
+            case 5: bne();break;
+            case 6: slt();break;
+            case 7: j();break;
+            //case 8: lw();break;
+            //case 9: sw();break;
+            case 8:addi();break;
+
+        }
     }
 }
 
