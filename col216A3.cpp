@@ -137,7 +137,7 @@ void bne(){
 
 void slt(){
     struct Instruction current = instructs[PC];
-    if(register_values[current.field_3] > register_values[current.field_2])register_values[current.field_1]=1;
+    if(register_values[current.field_3]==register_values[current.field_2])register_values[current.field_1]=1;
     else register_values[current.field_1]=0;
     PC++;
 }
@@ -460,6 +460,7 @@ int main(){
     clock_cycles = 0;
     initialise_Registers();
     perform_operations (true);
+    
     /*each instruction occupies 4 bytes. So, we will first of all maintain an array of instructions
      to get the instruction starting at memory address i (in the form of a struct). Rest of the memory is used in RAM*/
     /*so memory stores instructions (as structs here) and data as integers in decimal format*/
