@@ -137,7 +137,7 @@ void bne(){
 
 void slt(){
     struct Instruction current = instructs[PC];
-    if(register_values[current.field_3]==register_values[current.field_2])register_values[current.field_1]=1;
+    if(register_values[current.field_3] > register_values[current.field_2])register_values[current.field_1]=1;
     else register_values[current.field_1]=0;
     PC++;
 }
