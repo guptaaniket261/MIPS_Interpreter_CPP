@@ -1,0 +1,29 @@
+Case : Multiple instructions in the file, each instruction is executed exactly one time
+
+Testcase 1:
+
+addi $s0, $s0, 4
+addi $t0, $t0, -4
+mul $t1, $t0, $s0
+slt $a0, $t1, 10
+addi $t9, $t9, 1
+j 7
+beq $a0, $t9, 8
+sw $t1, 4($a0)
+lw $t8, 4($a0)
+add $t6, $t8, $t0
+
+Testcase 2:
+
+add $t0, $t0, 23
+sub $t1, $t1, -2
+mul $t2, $t0, $t1
+bne $t2, $t0, 5
+mul $v0, $t2, -4
+addi $s0, $s0, 1
+j 8
+lw $v0, 0($s0)
+lw $t0,    4($s0)
+sw $t5, 4($s0)
+sw $t6 , 0($s0) 
+bne $t5, $t6, 14
