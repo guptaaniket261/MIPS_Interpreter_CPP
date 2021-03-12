@@ -5,6 +5,8 @@
 #include<map>
 using namespace std;
 // function to convert a decimal number to a hexadecimal number
+long long int maxClockCycles = 10000;
+bool infinite_loop =false;
 string HexaNumber(int n)
 {
     string ans = "";
@@ -37,7 +39,10 @@ bool validFile = true;          //will be false if file is invalid at any point
 vector<Instruction>instructs;   //stores instructions as structs
 int memory[(1<<20)]={0}; //memory used to store the data
 int PC=0;               // PC pointer, points to the next instruction
+int clock_cycles =0;
 map<string,int> operation;
+map<int,string> intTostr_operation;
+
 
 void map_operations(){
     operation["add"]=1;
@@ -50,6 +55,17 @@ void map_operations(){
     operation["lw"]=8;
     operation["sw"]=9;
     operation["addi"]=10;
+
+    intTostr_operation[1]="add";
+    intTostr_operation[2]="sub";
+    intTostr_operation[3]="mul";
+    intTostr_operation[4]="beq";
+    intTostr_operation[5]="bne";
+    intTostr_operation[6]="slt";
+    intTostr_operation[7]="j";
+    intTostr_operation[8]="lw";
+    intTostr_operation[9]="sw";
+    intTostr_operation[10]="addi";
 
 }
 
@@ -148,7 +164,7 @@ void sw(){
 
 void addi(){
     struct Instruction current = instructs[PC];
-    register_values[current.field_1]=register_values[current.field_2]+stoi(current.field_2);
+    register_values[current.field_1]=register_values[current.field_2]+stoi(current.field_3);
     PC++;
 }
 
@@ -227,6 +243,10 @@ pair<int,int> SearchForInteger (int starting_index, int ending_index, string fil
 }
 string Match_Instruction(int start, int end, string file_string){
     //returns the matched instruction
+     if (start +3 <=end){
+        string ins =file_string.substr(start,4);
+        if (ins =="addi"){return ins;}
+    }
     if(start + 2 <=end){
         string ins = file_string.substr(start,3);
         if (ins == "add" || ins == "sub" || ins == "mul" || ins == "slt" ||ins =="beq" || ins =="bne"){return ins;}
@@ -234,10 +254,6 @@ string Match_Instruction(int start, int end, string file_string){
     if (start +1 <=end){
         string ins =file_string.substr(start,2);
         if (ins =="lw" || ins == "sw"){return ins;}
-    }
-    if (start +3 <=end){
-        string ins =file_string.substr(start,4);
-        if (ins =="addi"){return ins;}
     }
     if (start<=end){
         string ins= file_string.substr(start,1);
@@ -262,7 +278,9 @@ void Create_structs(string file_string){
         }
         if(ins == "add" || ins == "sub" || ins == "mul" || ins == "slt" || ins == "beq" || ins == "bne" || ins == "addi"){
             //now, there must be three registers ahead, delimited by comma
-            int reg1_start=SearchForRegister(i+3, file_string.size()-1, file_string);
+            int reg1_start;
+            if (ins =="addi"){reg1_start= SearchForRegister(i+4, file_string.size()-1, file_string);}
+            else{reg1_start = SearchForRegister(i+3, file_string.size()-1, file_string);}
             if(reg1_start==-1){validFile=false;return;}
             string R1=file_string.substr(reg1_start,3);
             //now first register has been found, it must be followed by a comma and there can be 0 or more whitespaces in between
@@ -299,6 +317,7 @@ void Create_structs(string file_string){
             new_instr.field_3 = R3;
             i = index_looped; //increment i
             instruction_found=true;
+            instructs.push_back(new_instr);
             continue;
         }
         else if (ins == "j"){
@@ -312,6 +331,7 @@ void Create_structs(string file_string){
                     int index_looped = integer_indices.second +1;
                     i = index_looped;
                     instruction_found =true;
+                    instructs.push_back(new_instr);
         }
         else if (ins == "lw" || ins == "sw"){
             //this has the format lw $t0, offset($register_name)
@@ -343,15 +363,51 @@ void Create_structs(string file_string){
             new_instr.field_3 = R2;
             i= rparenPos+1;
             instruction_found=true;
+            instructs.push_back(new_instr);
     }
 }
     }
 }
-void perform_operations(){
+void print_registers(){
+    for (int i =0 ;i <32; i++){
+        if (i==0) {cout<<register_numbers[i]<<" "<< std::hex <<register_values[register_numbers[i]];}
+        else {cout<<", "<<register_numbers[i]<<" "<< std::hex <<register_values[register_numbers[i]];}
+    }
+    cout<<"\n";
+}
+
+void Number_of_times(int ins_count[],int op_count[]){
+    cout<<"The number of times each instruction was executed is given below : \n"<<endl;
+    for(int i=0; i< instructs.size() ;i++){
+        cout<<"Instruction no: "<<i+1<<" was executed "<<ins_count[i]<<" times."<<endl;
+    }
+    
+    cout<<"\nThe number of times each type of instruction was executed is given below : \n"<<endl;
+    for(int i=1; i< 11 ;i++){
+        cout<<"Operation "<< intTostr_operation[i]<<" was executed "<<op_count[i]<<" times."<<endl;
+    }
+    cout<<"\nThe total number of clock cycles elapsed is : "<<clock_cycles<<"\n\n";
+
+}
+
+void perform_operations(bool flag){
+    // flag= true means we intend to print the register values, else we are simply counting the number of clock cycles
+    int execution_no=1;
+    int op_count[11]={0};
+    int ins_count[instructs.size()];
+    for (int j=0; j< instructs.size();j++){ins_count[j]=0;}
+    if (flag) { cout<< "\n";}
     while(PC<instructs.size()){
+        ins_count[PC]++;
         struct Instruction current = instructs[PC];
         int action= operation[current.name];
-        switch(action){
+        op_count[action]++;
+        clock_cycles++;
+        if (clock_cycles > maxClockCycles){
+            infinite_loop =true;
+            return;
+        }
+        switch (action){
             case 1: add();break;
             case 2: sub();break;
             case 3: mul();break;
@@ -361,29 +417,48 @@ void perform_operations(){
             case 7: j();break;
             case 8: lw();break;
             case 9: sw();break;
-            case 8:addi();break;
-
+            case 10:addi();break;
+        }
+        if (flag){
+        cout<<"Execution no. "<<execution_no++<<"\n\n";
+        print_registers();
+            cout<<"\n";
         }
     }
+    if (flag){
+        Number_of_times(ins_count,op_count);
+    }
+    
 }
+
+
 
 int main(){
     
-     ifstream file("mips_program.txt");
+      ifstream file("mips_program.txt");
       string current_line;
       map_register_numbers();
       initialise_Registers();
-      while(file){
-          getline(file,current_line);
+      validFile = true;
+      infinite_loop = false;
+      while(getline(file,current_line)){
           Create_structs(current_line);
       }
     map_operations();
-    perform_operations();
-    
     if(!validFile){
         cout<<"Invalid MIPS program"<<endl;
         return -1;
     }
+    perform_operations(false);
+    
+    if (infinite_loop){
+        cout<<"Time limit exceeded !"<<endl;
+        return -1;
+    }
+    PC = 0;
+    clock_cycles = 0;
+    initialise_Registers();
+    perform_operations (true);
     
     /*each instruction occupies 4 bytes. So, we will first of all maintain an array of instructions
      to get the instruction starting at memory address i (in the form of a struct). Rest of the memory is used in RAM*/
