@@ -1,6 +1,18 @@
-Case : Multiple instructions in the file, each instruction is executed exactly one time
+Case 1: Single instruction
 
-Testcase 1:
+Testcase 1.1 - 
+Input
+add $t0, $t0, 5
+
+
+Testcase 1.2 - 
+Input
+sub $t0, $t0, -5
+
+
+Case 2: Multiple instructions in the file, each instruction is executed exactly one time
+
+Testcase 2.1:
 
 addi $s0, $s0, 4
 addi $t0, $t0, -4
@@ -13,7 +25,7 @@ sw $t1, 4($a0)
 lw $t8, 4($a0)
 add $t6, $t8, $t0
 
-Testcase 2:
+Testcase 2.2:
 
 add $t0, $t0, 23
 sub $t1, $t1, -2
@@ -27,3 +39,70 @@ lw $t0,    4($s0)
 sw $t5, 4($s0)
 sw $t6 , 0($s0) 
 bne $t5, $t6, 14
+
+
+Case 3: Multiple instructions in the file, each used >=1 times
+
+Testcase 3.1:
+
+add $t0, $t0, 5
+addi $t1, $t1, 2
+mul $t2, $t0, 2
+add $t3, $t3, 12
+beq $t2, $t3, 8
+add $t2, $t2, 1
+j 5
+sub $t9, $t9, -10
+
+Testcase 3.2:
+
+add $t1, $t1, 10
+add $t2, $t2, 5
+sw $t1, 11($t2)
+lw $t3, 11($t2)
+sub $t3, $t3, -2
+sub $t3, $t3, 1
+slt $t4, $t3, $t2
+blt $t3, $t2, 9
+j 6
+
+
+
+Case 4: Syntactical Error
+
+Testcase 4.1 (Integer in place of register value):
+
+add $t5, $t5, 10
+mul $t9, $t5, $t5
+slt $t1, $t5, $t9
+add $t6, 8, 9
+
+Testcase 4.2 (comma missing):
+
+add $t0, $t0, 5
+slt $t1 $t0 $t2
+sub $t6, $t6, 100
+
+Testcase 4.3 (invalid instruction type):
+
+addi $t0, $t0, 9
+subtract $t3, $t0, 5
+
+Case 5: Infinite loop
+
+Testcase 5.1:
+
+add $t0, $t0, 1
+mul $t1, $t0, 2
+sub $t3, $t1, 2
+j 2
+add $t0, $t0, 5
+mul $t1, $t0, 7
+sub $t3, $t1, 11
+
+Testcase 5.2 (simple jump statement):
+
+j 1
+
+
+
