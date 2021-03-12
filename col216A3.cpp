@@ -228,10 +228,11 @@ int SearchForCharacter (int starting_index, int ending_index, string file_string
 }
 pair<int,int> SearchForInteger (int starting_index, int ending_index, string file_string){
     //returns the starting and ending index of integer if found
-    int start=-1;int end=-1;
+    int start=-1;int end=-1;bool firstMinus = true;
     for (int j= starting_index; j<=ending_index; j++){
         if((file_string[j] == ' ' || file_string[j] == '\t') && start ==-1){continue;} //removing the starting spaces and tabs}
-        if (isdigit(file_string[j])){
+        if (isdigit(file_string[j]) || (file_string[j]=='-' && firstMinus)){
+            firstMinus = false;
             if(start==-1){start=j;end=j;}
             else{end=j;}
         }
@@ -375,7 +376,6 @@ void print_registers(){
     }
     cout<<"\n";
 }
-
 void Number_of_times(int ins_count[],int op_count[]){
     cout<<"The number of times each instruction was executed is given below : \n"<<endl;
     for(int i=0; i< instructs.size() ;i++){
