@@ -22,7 +22,8 @@ string HexaNumber(int n)
         }
         n/=16;
     }
-    return ans;
+    if(ans=="")return "0";
+    else return ans;
 }
 
 struct Instruction
@@ -73,7 +74,7 @@ void map_operations(){
 
 bool is_integer(string s){
     for(int j=0;j<s.length();j++){
-        if(isdigit(s[j]) == false){
+        if(isdigit(s[j]) == false && !(j==0 and s[j]=='-')){
             return false;
         }
     }
@@ -371,22 +372,22 @@ void Create_structs(string file_string){
 }
 void print_registers(){
     for (int i =0 ;i <32; i++){
-        if (i==0) {cout<<register_numbers[i]<<" "<< std::hex <<register_values[register_numbers[i]];}
-        else {cout<<", "<<register_numbers[i]<<" "<< std::hex <<register_values[register_numbers[i]];}
+        if (i==0) {cout<<register_numbers[i]<<" "<< std:: hex <<(register_values[register_numbers[i]]);}
+        else {cout<<", "<<register_numbers[i]<<" "<< std:: hex <<(register_values[register_numbers[i]]);}
     }
     cout<<"\n";
 }
 void Number_of_times(int ins_count[],int op_count[]){
     cout<<"The number of times each instruction was executed is given below : \n"<<endl;
     for(int i=0; i< instructs.size() ;i++){
-        cout<<"Instruction no: "<<i+1<<" was executed "<<ins_count[i]<<" times."<<endl;
+        cout<<"Instruction no: "<< std::dec <<i+1<<" was executed "<<std::dec <<ins_count[i]<<" times."<<endl;
     }
     
     cout<<"\nThe number of times each type of instruction was executed is given below : \n"<<endl;
     for(int i=1; i< 11 ;i++){
-        cout<<"Operation "<< intTostr_operation[i]<<" was executed "<<op_count[i]<<" times."<<endl;
+        cout<<"Operation "<< intTostr_operation[i]<<" was executed "<<std::dec << op_count[i]<<" times."<<endl;
     }
-    cout<<"\nThe total number of clock cycles elapsed is : "<<clock_cycles<<"\n\n";
+    cout<<"\nThe total number of clock cycles elapsed is : "<<std::dec <<clock_cycles<<"\n\n";
 
 }
 
@@ -420,7 +421,7 @@ void perform_operations(bool flag){
             case 10:addi();break;
         }
         if (flag){
-        cout<<"Execution no. "<<execution_no++<<"\n\n";
+        cout<<"Execution no. "<< std::dec << execution_no++<<"\n\n";
         print_registers();
             cout<<"\n";
         }
