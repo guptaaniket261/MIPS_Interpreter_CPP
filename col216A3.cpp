@@ -460,7 +460,6 @@ int main(){
     clock_cycles = 0;
     initialise_Registers();
     perform_operations (true);
-    
     /*each instruction occupies 4 bytes. So, we will first of all maintain an array of instructions
      to get the instruction starting at memory address i (in the form of a struct). Rest of the memory is used in RAM*/
     /*so memory stores instructions (as structs here) and data as integers in decimal format*/
