@@ -309,8 +309,18 @@ void Create_structs(string file_string){
                     return;
                 }
             }
-            else{R3= file_string.substr(integer_indices.first, integer_indices.second- integer_indices.first+1);
-                index_looped = integer_indices.second+1;
+            else{
+                if(ins=="beq" || ins == "bne"){
+                    if(file_string[integer_indices.first]=='-'){validFile=false; return;}
+                    else{
+                        R3= file_string.substr(integer_indices.first, integer_indices.second- integer_indices.first+1);
+                        index_looped = integer_indices.second+1;
+                    }
+                }
+                else{
+                    R3= file_string.substr(integer_indices.first, integer_indices.second- integer_indices.first+1);
+                    index_looped = integer_indices.second+1;
+                }    
             }
             struct Instruction new_instr;
             new_instr.name=ins;
