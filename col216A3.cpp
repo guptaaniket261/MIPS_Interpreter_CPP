@@ -151,14 +151,18 @@ void j(){
 
 void lw(){
     struct Instruction current = instructs[PC];
-    register_values[current.field_1]= memory[register_values[current.field_3]+stoi(current.field_2)];
+     int address = register_values[current.field_3]+stoi(current.field_2);
+    if (address >= (1<<(20)) || address < 4 * instructs.size()){validFile =false;return;}
+    register_values[current.field_1]= memory[address];
     PC++;
 }
 
 
 void sw(){
     struct Instruction current = instructs[PC];
-    memory[register_values[current.field_3]+stoi(current.field_2)] = register_values[current.field_1];
+    int address = register_values[current.field_3]+stoi(current.field_2);
+    if (address >= (1<<(20)) || address < 4 * instructs.size()){validFile =false;return;}
+    memory[address] = register_values[current.field_1];
     PC++;
 }
 
@@ -430,6 +434,7 @@ void perform_operations(bool flag){
             case 9: sw();break;
             case 10:addi();break;
         }
+        if (!validFile) {return;}
         if (flag){
         cout<<"Execution no. "<< std::dec << execution_no++<<"\n\n";
         print_registers();
@@ -464,6 +469,10 @@ int main(){
     
     if (infinite_loop){
         cout<<"Time limit exceeded !"<<endl;
+        return -1;
+    }
+    if (!validFile){
+        cout<<"Invalid MIPS program"<<endl;  //due to wrong lw and sw addresses
         return -1;
     }
     PC = 0;

@@ -464,7 +464,7 @@ Operation addi was executed 0 times.
 
 The total number of clock cycles elapsed is : 32
 
-TESTCASE 4.1, 4.2, 4.3, 4.4
+TESTCASE 4.1, 4.2, 4.3, 4.4, 4.5, 4.6
 
 Invalid MIPS program
 

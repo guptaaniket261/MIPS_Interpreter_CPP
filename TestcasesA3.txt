@@ -95,6 +95,15 @@ Testcase 4.4 (Multiple instructions on the same line)
 
 sub $t0, $t0, -3 addi $t1, $t1, 30
 
+Testcase 4.5 (Invalid address, greater than allowed memory)
+
+sw $t0,1048576($t1)
+
+Testcase 4.6 (Invalid address, within the instruction memory size)
+
+lw $t0, 3($t1)
+
+
 Case 5: Infinite loop
 
 Testcase 5.1:
