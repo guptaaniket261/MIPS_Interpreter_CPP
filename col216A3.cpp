@@ -324,7 +324,7 @@ void Create_structs(string file_string){
         }
         else if (ins == "j"){
             pair<int,int> integer_indices = SearchForInteger(i+1 ,file_string.size()-1, file_string);
-            if (integer_indices.first == -1){validFile=false; return;}
+            if (integer_indices.first == -1 || file_string[integer_indices.first]=='-'){validFile=false; return;}
                     struct Instruction new_instr;
                     new_instr.name=ins;
                     new_instr.field_1 = file_string.substr(integer_indices.first, integer_indices.second- integer_indices.first+1);
