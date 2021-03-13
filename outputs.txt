@@ -93,33 +93,33 @@ $r0 0, $at 0, $v0 0, $v1 0, $a0 0, $a1 0, $a2 0, $a3 0, $t0 fffffffc, $t1 ffffff
 
 Execution no. 4
 
-$r0 0, $at 0, $v0 0, $v1 0, $a0 1, $a1 0, $a2 0, $a3 0, $t0 fffffffc, $t1 fffffff0, $t2 0, $t3 0, $t4 0, $t5 0, $t6 0, $t7 0, $s0 4, $s1 0, $s2 0, $s3 0, $s4 0, $s5 0, $s6 0, $s7 0, $t8 0, $t9 0, $k0 0, $k1 0, $gp 0, $sp 7fffeffc, $s8 0, $ra 0
+$r0 0, $at 0, $v0 0, $v1 0, $a0 0, $a1 0, $a2 0, $a3 0, $t0 fffffffc, $t1 fffffff0, $t2 0, $t3 0, $t4 0, $t5 0, $t6 0, $t7 0, $s0 4, $s1 0, $s2 0, $s3 0, $s4 0, $s5 0, $s6 0, $s7 0, $t8 0, $t9 0, $k0 0, $k1 0, $gp 0, $sp 7fffeffc, $s8 0, $ra 0
 
 Execution no. 5
 
-$r0 0, $at 0, $v0 0, $v1 0, $a0 1, $a1 0, $a2 0, $a3 0, $t0 fffffffc, $t1 fffffff0, $t2 0, $t3 0, $t4 0, $t5 0, $t6 0, $t7 0, $s0 4, $s1 0, $s2 0, $s3 0, $s4 0, $s5 0, $s6 0, $s7 0, $t8 0, $t9 1, $k0 0, $k1 0, $gp 0, $sp 7fffeffc, $s8 0, $ra 0
+$r0 0, $at 0, $v0 0, $v1 0, $a0 0, $a1 0, $a2 0, $a3 0, $t0 fffffffc, $t1 fffffff0, $t2 0, $t3 0, $t4 0, $t5 0, $t6 0, $t7 0, $s0 4, $s1 0, $s2 0, $s3 0, $s4 0, $s5 0, $s6 0, $s7 0, $t8 0, $t9 1, $k0 0, $k1 0, $gp 0, $sp 7fffeffc, $s8 0, $ra 0
 
 Execution no. 6
 
-$r0 0, $at 0, $v0 0, $v1 0, $a0 1, $a1 0, $a2 0, $a3 0, $t0 fffffffc, $t1 fffffff0, $t2 0, $t3 0, $t4 0, $t5 0, $t6 0, $t7 0, $s0 4, $s1 0, $s2 0, $s3 0, $s4 0, $s5 0, $s6 0, $s7 0, $t8 0, $t9 1, $k0 0, $k1 0, $gp 0, $sp 7fffeffc, $s8 0, $ra 0
+$r0 0, $at 0, $v0 0, $v1 0, $a0 0, $a1 0, $a2 0, $a3 0, $t0 fffffffc, $t1 fffffff0, $t2 0, $t3 0, $t4 0, $t5 0, $t6 0, $t7 0, $s0 4, $s1 0, $s2 0, $s3 0, $s4 0, $s5 0, $s6 0, $s7 0, $t8 0, $t9 1, $k0 0, $k1 0, $gp 0, $sp 7fffeffc, $s8 0, $ra 0
 
 Execution no. 7
 
-$r0 0, $at 0, $v0 0, $v1 0, $a0 1, $a1 0, $a2 0, $a3 0, $t0 fffffffc, $t1 fffffff0, $t2 0, $t3 0, $t4 0, $t5 0, $t6 0, $t7 0, $s0 4, $s1 0, $s2 0, $s3 0, $s4 0, $s5 0, $s6 0, $s7 0, $t8 0, $t9 1, $k0 0, $k1 0, $gp 0, $sp 7fffeffc, $s8 0, $ra 0
+$r0 0, $at 0, $v0 0, $v1 0, $a0 0, $a1 0, $a2 0, $a3 0, $t0 fffffffc, $t1 fffffff0, $t2 0, $t3 0, $t4 0, $t5 0, $t6 0, $t7 0, $s0 4, $s1 0, $s2 0, $s3 0, $s4 0, $s5 0, $s6 0, $s7 0, $t8 0, $t9 1, $k0 0, $k1 0, $gp 0, $sp 7fffeffc, $s8 0, $ra 0
 
 Execution no. 8
 
-$r0 0, $at 0, $v0 0, $v1 0, $a0 1, $a1 0, $a2 0, $a3 0, $t0 fffffffc, $t1 fffffff0, $t2 0, $t3 0, $t4 0, $t5 0, $t6 0, $t7 0, $s0 4, $s1 0, $s2 0, $s3 0, $s4 0, $s5 0, $s6 0, $s7 0, $t8 0, $t9 1, $k0 0, $k1 0, $gp 0, $sp 7fffeffc, $s8 0, $ra 0
+$r0 0, $at 0, $v0 0, $v1 0, $a0 0, $a1 0, $a2 0, $a3 0, $t0 fffffffc, $t1 fffffff0, $t2 0, $t3 0, $t4 0, $t5 0, $t6 0, $t7 0, $s0 4, $s1 0, $s2 0, $s3 0, $s4 0, $s5 0, $s6 0, $s7 0, $t8 0, $t9 1, $k0 0, $k1 0, $gp 0, $sp 7fffeffc, $s8 0, $ra 0
 
 Execution no. 9
 
-$r0 0, $at 0, $v0 0, $v1 0, $a0 1, $a1 0, $a2 0, $a3 0, $t0 fffffffc, $t1 fffffff0, $t2 0, $t3 0, $t4 0, $t5 0, $t6 0, $t7 0, $s0 4, $s1 0, $s2 0, $s3 0, $s4 0, $s5 0, $s6 0, $s7 0, $t8 fffffff0, $t9 1, $k0 0, $k1 0, $gp 0, $sp 7fffeffc, $s8 0, $ra 0
+$r0 0, $at 0, $v0 0, $v1 0, $a0 0, $a1 0, $a2 0, $a3 0, $t0 fffffffc, $t1 fffffff0, $t2 0, $t3 0, $t4 0, $t5 0, $t6 0, $t7 0, $s0 4, $s1 0, $s2 0, $s3 0, $s4 0, $s5 0, $s6 0, $s7 0, $t8 fffffff0, $t9 1, $k0 0, $k1 0, $gp 0, $sp 7fffeffc, $s8 0, $ra 0
 
 Execution no. 10
 
-$r0 0, $at 0, $v0 0, $v1 0, $a0 1, $a1 0, $a2 0, $a3 0, $t0 fffffffc, $t1 fffffff0, $t2 0, $t3 0, $t4 0, $t5 0, $t6 ffffffec, $t7 0, $s0 4, $s1 0, $s2 0, $s3 0, $s4 0, $s5 0, $s6 0, $s7 0, $t8 fffffff0, $t9 1, $k0 0, $k1 0, $gp 0, $sp 7fffeffc, $s8 0, $ra 0
+$r0 0, $at 0, $v0 0, $v1 0, $a0 0, $a1 0, $a2 0, $a3 0, $t0 fffffffc, $t1 fffffff0, $t2 0, $t3 0, $t4 0, $t5 0, $t6 ffffffec, $t7 0, $s0 4, $s1 0, $s2 0, $s3 0, $s4 0, $s5 0, $s6 0, $s7 0, $t8 fffffff0, $t9 1, $k0 0, $k1 0, $gp 0, $sp 7fffeffc, $s8 0, $ra 0
 
-The number of times each instruction was executed is given below : 
+The number of times each instruction was executed is given below :
 
 Instruction no: 1 was executed 1 times.
 Instruction no: 2 was executed 1 times.
@@ -150,8 +150,6 @@ The total number of clock cycles elapsed is : 10
 
 TESTCASE : 2.2
 
-
-
 Execution no. 1
 
 $r0 0, $at 0, $v0 0, $v1 0, $a0 0, $a1 0, $a2 0, $a3 0, $t0 17, $t1 0, $t2 0, $t3 0, $t4 0, $t5 0, $t6 0, $t7 0, $s0 0, $s1 0, $s2 0, $s3 0, $s4 0, $s5 0, $s6 0, $s7 0, $t8 0, $t9 0, $k0 0, $k1 0, $gp 0, $sp 7fffeffc, $s8 0, $ra 0
@@ -162,27 +160,33 @@ $r0 0, $at 0, $v0 0, $v1 0, $a0 0, $a1 0, $a2 0, $a3 0, $t0 17, $t1 2, $t2 0, $t
 
 Execution no. 3
 
-$r0 0, $at 0, $v0 0, $v1 0, $a0 0, $a1 0, $a2 0, $a3 0, $t0 17, $t1 2, $t2 2e, $t3 0, $t4 0, $t5 0, $t6 0, $t7 0, $s0 0, $s1 0, $s2 0, $s3 0, $s4 0, $s5 0, $s6 0, $s7 0, $t8 0, $t9 0, $k0 0, $k1 0, $gp 0, $sp 7fffeffc, $s8 0, $ra 0
+$r0 0, $at 0, $v0 0, $v1 0, $a0 0, $a1 0, $a2 0, $a3 0, $t0 17, $t1 2, $t2 2e, $t3 0, $t4 0, $t5 0, $t6 0, $t7 0, $s0 0, $s1 0, $s2 0, $s3 0, $s4 0, $s5 0, $s6 0, $s7 0, 
+$t8 0, $t9 0, $k0 0, $k1 0, $gp 0, $sp 7fffeffc, $s8 0, $ra 0
 
 Execution no. 4
 
-$r0 0, $at 0, $v0 0, $v1 0, $a0 0, $a1 0, $a2 0, $a3 0, $t0 17, $t1 2, $t2 2e, $t3 0, $t4 0, $t5 0, $t6 0, $t7 0, $s0 0, $s1 0, $s2 0, $s3 0, $s4 0, $s5 0, $s6 0, $s7 0, $t8 0, $t9 0, $k0 0, $k1 0, $gp 0, $sp 7fffeffc, $s8 0, $ra 0
+$r0 0, $at 0, $v0 0, $v1 0, $a0 0, $a1 0, $a2 0, $a3 0, $t0 17, $t1 2, $t2 2e, $t3 0, $t4 0, $t5 0, $t6 0, $t7 0, $s0 0, $s1 0, $s2 0, $s3 0, $s4 0, $s5 0, $s6 0, $s7 0, 
+$t8 0, $t9 0, $k0 0, $k1 0, $gp 0, $sp 7fffeffc, $s8 0, $ra 0
 
 Execution no. 5
 
-$r0 0, $at 0, $v0 ffffff48, $v1 0, $a0 0, $a1 0, $a2 0, $a3 0, $t0 17, $t1 2, $t2 2e, $t3 0, $t4 0, $t5 0, $t6 0, $t7 0, $s0 0, $s1 0, $s2 0, $s3 0, $s4 0, $s5 0, $s6 0, $s7 0, $t8 0, $t9 0, $k0 0, $k1 0, $gp 0, $sp 7fffeffc, $s8 0, $ra 0
+$r0 0, $at 0, $v0 ffffff48, $v1 0, $a0 0, $a1 0, $a2 0, $a3 0, $t0 17, $t1 2, $t2 2e, $t3 0, $t4 0, $t5 0, $t6 0, $t7 0, $s0 0, $s1 0, $s2 0, $s3 0, $s4 0, $s5 0, $s6 0, 
+$s7 0, $t8 0, $t9 0, $k0 0, $k1 0, $gp 0, $sp 7fffeffc, $s8 0, $ra 0
 
 Execution no. 6
 
-$r0 0, $at 0, $v0 ffffff48, $v1 0, $a0 0, $a1 0, $a2 0, $a3 0, $t0 17, $t1 2, $t2 2e, $t3 0, $t4 0, $t5 0, $t6 0, $t7 0, $s0 1, $s1 0, $s2 0, $s3 0, $s4 0, $s5 0, $s6 0, $s7 0, $t8 0, $t9 0, $k0 0, $k1 0, $gp 0, $sp 7fffeffc, $s8 0, $ra 0
+$r0 0, $at 0, $v0 ffffff48, $v1 0, $a0 0, $a1 0, $a2 0, $a3 0, $t0 17, $t1 2, $t2 2e, $t3 0, $t4 0, $t5 0, $t6 0, $t7 0, $s0 1, $s1 0, $s2 0, $s3 0, $s4 0, $s5 0, $s6 0, 
+$s7 0, $t8 0, $t9 0, $k0 0, $k1 0, $gp 0, $sp 7fffeffc, $s8 0, $ra 0
 
 Execution no. 7
 
-$r0 0, $at 0, $v0 ffffff48, $v1 0, $a0 0, $a1 0, $a2 0, $a3 0, $t0 17, $t1 2, $t2 2e, $t3 0, $t4 0, $t5 0, $t6 0, $t7 0, $s0 1, $s1 0, $s2 0, $s3 0, $s4 0, $s5 0, $s6 0, $s7 0, $t8 0, $t9 0, $k0 0, $k1 0, $gp 0, $sp 7fffeffc, $s8 0, $ra 0
+$r0 0, $at 0, $v0 ffffff48, $v1 0, $a0 0, $a1 0, $a2 0, $a3 0, $t0 17, $t1 2, $t2 2e, $t3 0, $t4 0, $t5 0, $t6 0, $t7 0, $s0 1, $s1 0, $s2 0, $s3 0, $s4 0, $s5 0, $s6 0, 
+$s7 0, $t8 0, $t9 0, $k0 0, $k1 0, $gp 0, $sp 7fffeffc, $s8 0, $ra 0
 
 Execution no. 8
 
-$r0 0, $at 0, $v0 0, $v1 0, $a0 0, $a1 0, $a2 0, $a3 0, $t0 17, $t1 2, $t2 2e, $t3 0, $t4 0, $t5 0, $t6 0, $t7 0, $s0 1, $s1 0, $s2 0, $s3 0, $s4 0, $s5 0, $s6 0, $s7 0, $t8 0, $t9 0, $k0 0, $k1 0, $gp 0, $sp 7fffeffc, $s8 0, $ra 0
+$r0 0, $at 0, $v0 0, $v1 0, $a0 0, $a1 0, $a2 0, $a3 0, $t0 17, $t1 2, $t2 2e, $t3 0, $t4 0, $t5 0, $t6 0, $t7 0, $s0 1, $s1 0, $s2 0, $s3 0, $s4 0, $s5 0, $s6 0, $s7 0, 
+$t8 0, $t9 0, $k0 0, $k1 0, $gp 0, $sp 7fffeffc, $s8 0, $ra 0
 
 Execution no. 9
 
@@ -200,7 +204,7 @@ Execution no. 12
 
 $r0 0, $at 0, $v0 0, $v1 0, $a0 0, $a1 0, $a2 0, $a3 0, $t0 0, $t1 2, $t2 2e, $t3 0, $t4 0, $t5 0, $t6 0, $t7 0, $s0 1, $s1 0, $s2 0, $s3 0, $s4 0, $s5 0, $s6 0, $s7 0, $t8 0, $t9 0, $k0 0, $k1 0, $gp 0, $sp 7fffeffc, $s8 0, $ra 0
 
-The number of times each instruction was executed is given below : 
+The number of times each instruction was executed is given below :
 
 Instruction no: 1 was executed 1 times.
 Instruction no: 2 was executed 1 times.
@@ -215,7 +219,7 @@ Instruction no: 10 was executed 1 times.
 Instruction no: 11 was executed 1 times.
 Instruction no: 12 was executed 1 times.
 
-The number of times each type of instruction was executed is given below : 
+The number of times each type of instruction was executed is given below :
 
 Operation add was executed 1 times.
 Operation sub was executed 1 times.
@@ -431,13 +435,13 @@ $r0 0, $at 0, $v0 0, $v1 0, $a0 0, $a1 0, $a2 0, $a3 0, $t0 0, $t1 a, $t2 5, $t3
 
 Execution no. 31
 
-$r0 0, $at 0, $v0 0, $v1 0, $a0 0, $a1 0, $a2 0, $a3 0, $t0 0, $t1 a, $t2 5, $t3 5, $t4 1, $t5 0, $t6 0, $t7 0, $s0 0, $s1 0, $s2 0, $s3 0, $s4 0, $s5 0, $s6 0, $s7 0, $t8 0, $t9 0, $k0 0, $k1 0, $gp 0, $sp 7fffeffc, $s8 0, $ra 0
+$r0 0, $at 0, $v0 0, $v1 0, $a0 0, $a1 0, $a2 0, $a3 0, $t0 0, $t1 a, $t2 5, $t3 5, $t4 0, $t5 0, $t6 0, $t7 0, $s0 0, $s1 0, $s2 0, $s3 0, $s4 0, $s5 0, $s6 0, $s7 0, $t8 0, $t9 0, $k0 0, $k1 0, $gp 0, $sp 7fffeffc, $s8 0, $ra 0
 
 Execution no. 32
 
-$r0 0, $at 0, $v0 0, $v1 0, $a0 0, $a1 0, $a2 0, $a3 0, $t0 0, $t1 a, $t2 5, $t3 5, $t4 1, $t5 0, $t6 0, $t7 0, $s0 0, $s1 0, $s2 0, $s3 0, $s4 0, $s5 0, $s6 0, $s7 0, $t8 0, $t9 0, $k0 0, $k1 0, $gp 0, $sp 7fffeffc, $s8 0, $ra 0
+$r0 0, $at 0, $v0 0, $v1 0, $a0 0, $a1 0, $a2 0, $a3 0, $t0 0, $t1 a, $t2 5, $t3 5, $t4 0, $t5 0, $t6 0, $t7 0, $s0 0, $s1 0, $s2 0, $s3 0, $s4 0, $s5 0, $s6 0, $s7 0, $t8 0, $t9 0, $k0 0, $k1 0, $gp 0, $sp 7fffeffc, $s8 0, $ra 0
 
-The number of times each instruction was executed is given below : 
+The number of times each instruction was executed is given below :
 
 Instruction no: 1 was executed 1 times.
 Instruction no: 2 was executed 1 times.
@@ -449,7 +453,7 @@ Instruction no: 7 was executed 7 times.
 Instruction no: 8 was executed 7 times.
 Instruction no: 9 was executed 6 times.
 
-The number of times each type of instruction was executed is given below : 
+The number of times each type of instruction was executed is given below :
 
 Operation add was executed 2 times.
 Operation sub was executed 8 times.
