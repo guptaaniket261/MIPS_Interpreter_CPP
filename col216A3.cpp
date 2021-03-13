@@ -158,7 +158,7 @@ void j(){
 void lw(){
     struct Instruction current = instructs[PC];
      int address = register_values[current.field_3]+stoi(current.field_2);
-    if (address >= (1<<(20)) || address < 4 * instructs.size()){validFile =false;return;}
+    if ((address >= (1<<(20)) || address < 4 * instructs.size()) || address%4!=0){validFile =false;return;}
     register_values[current.field_1]= memory[address];
     PC++;
 }
@@ -167,7 +167,7 @@ void lw(){
 void sw(){
     struct Instruction current = instructs[PC];
     int address = register_values[current.field_3]+stoi(current.field_2);
-    if (address >= (1<<(20)) || address < 4 * instructs.size()){validFile =false;return;}
+    if ((address >= (1<<(20)) || address < 4*instructs.size()) || address%4!=0){validFile =false;return;}
     memory[address] = register_values[current.field_1];
     PC++;
 }
